@@ -1,12 +1,9 @@
 <p align="center">
-  <img src="logo.png" alt="BlackBird Launcher" width="180" />
+  <img src="blackbird_design.png" alt="BlackBird Design" width="100%" />
 </p>
 
-<h1 align="center">BlackBird Launcher — Releases & Distribution</h1>
-
-<p align="center">
-  <em>Canal oficial de distribución de versiones compiladas (APK) y actualizaciones OTA (Over-The-Air) para autorradios Android.</em>
-</p>
+# BlackBird Launcher — Releases & Distribution
+### *Canal oficial de distribución de versiones compiladas (APK) y actualizaciones OTA para autorradios Android*
 
 <p align="center">
   <a href="../../releases/latest">
