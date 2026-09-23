@@ -33,7 +33,7 @@ Si detecta una posible vulnerabilidad de seguridad en BlackBird Launcher, le sol
 
 1. **GitHub Security Advisory:** Envíe un reporte confidencial a través de la pestaña **Security > Advisories > Report a vulnerability** en el repositorio oficial:  
    `https://github.com/RubyCrack/BL-launcher/security/advisories/new`
-2. **Contacto directo:** Si no dispone de acceso a GitHub Security Advisories, contacte de forma privada con el mantenedor (`RubyCrack`) a través de un canal privado de GitHub.
+2. **Si no aparece «Report a vulnerability»:** La recepción privada de vulnerabilidades puede no estar habilitada en ese repositorio. No incluya detalles explotables ni datos personales en una incidencia pública. Por ahora no se publica un canal privado alternativo; el mantenedor debe habilitar el reporte privado antes de presentarlo como vía disponible.
 
 ### Información a incluir en el reporte:
 * Versión exacta de BlackBird Launcher afectada.
@@ -45,5 +45,5 @@ Si detecta una posible vulnerabilidad de seguridad en BlackBird Launcher, le sol
 
 ## 4. Compromiso de Respuesta
 
-* **Reconocimiento inicial:** Responderemos a su reporte en un plazo máximo de **48 a 72 horas**.
-* **Evaluación y parche:** Se coordinará el análisis del impacto y la publicación de una versión parcheada (*hotfix*) en el repositorio de descargas antes de hacer pública la divulgación.
+* **Reconocimiento inicial:** El mantenedor intentará confirmar la recepción y valorar el reporte tan pronto como sea posible; no se garantiza un plazo fijo de respuesta.
+* **Evaluación y parche:** Cuando el problema sea reproducible y afecte a versiones soportadas, se coordinará una corrección y la divulgación responsable según su impacto y los recursos disponibles.

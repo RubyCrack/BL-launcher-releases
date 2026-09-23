@@ -6,15 +6,15 @@ BlackBird Launcher utiliza y se apoya en datos abiertos, recursos tipográficos 
 
 ## 1. Datos Geográficos y Cartografía
 
-### OpenStreetMap & Overpass API
+### OpenStreetMap y Overpass API
 * **Uso en la aplicación:** Consulta de posiciones de cinemómetros y puntos de control de velocidad para el módulo *SafeRoute / Radar Runtime*.
 * **Aviso de copyright:** **© Colaboradores de OpenStreetMap**
-* **Licencia:** Los datos cartográficos de OpenStreetMap se distribuyen bajo la **Licencia de Bases de Datos Abiertas (ODbL)** de la Fundación OpenStreetMap (OSMF).
+* **Licencia:** Los datos geográficos de OpenStreetMap se distribuyen bajo la **Licencia de Bases de Datos Abiertas (ODbL)** de la Fundación OpenStreetMap (OSMF). La instancia `overpass-api.de` que atiende las consultas de radar está operada por FOSSGIS; OSMF no opera esa instancia.
 * **Más información:** [https://www.openstreetmap.org/copyright](https://www.openstreetmap.org/copyright)
 
 ### Open-Meteo
 * **Uso en la aplicación:** Previsiones meteorológicas, temperatura ambiente y estado del cielo.
-* **Licencia y atribución:** Datos proporcionados por **Open-Meteo.com** bajo licencia de datos abiertos (CC BY 4.0).
+* **Licencia y atribución:** Datos proporcionados por **Open-Meteo.com** bajo **CC BY 4.0**. Sus [condiciones de atribución](https://open-meteo.com/en/licence) exigen un enlace junto a los datos meteorológicos mostrados. La API gratuita tiene [condiciones para uso no comercial](https://open-meteo.com/en/terms).
 * **Más información:** [https://open-meteo.com/](https://open-meteo.com/)
 
 ---
@@ -25,7 +25,7 @@ BlackBird Launcher utiliza y se apoya en datos abiertos, recursos tipográficos 
 * **Diseño:** Julieta Ulanovsky, Sol Matas, Juan Pablo del Peral, Jacques Le Bailly.
 * **Licencia:** **SIL Open Font License, Version 1.1 (OFL-1.1)**.
 * **Términos:** Este tipo de letra está licenciado bajo la SIL Open Font License 1.1, que permite su uso, estudio, modificación y redistribución libre siempre que no se venda de forma aislada.
-* **Texto de la licencia:** [http://scripts.sil.org/OFL](http://scripts.sil.org/OFL)
+* **Texto de la licencia:** [SIL Open Font License 1.1](https://openfontlicense.org/open-font-license-official-text/)
 
 ---
 
@@ -65,3 +65,19 @@ limitations under the License.
 
 * **JUnit 4** — Licenciado bajo la *Eclipse Public License 1.0 (EPL-1.0)*.
 * **AndroidX Test / Espresso** — Licenciado bajo la *Apache License 2.0*.
+
+---
+
+## 5. Marcas Registradas y Propiedad Industrial
+
+Todas las marcas comerciales, logotipos, nombres de productos y marcas de servicio mencionadas en este repositorio o en la aplicación pertenecen a sus respectivos titulares:
+
+* **Android, Google, Google Maps y Google Play** son marcas comerciales registradas de Google LLC.
+* **Bluetooth®** es una marca comercial registrada de Bluetooth SIG, Inc.
+* **Spotify** es una marca comercial registrada de Spotify AB.
+* **Waze** es una marca comercial registrada de Waze Mobile Ltd. / Google LLC.
+* **MediaTek** es una marca comercial de MediaTek Inc.
+* Los nombres, modelos y logotipos de fabricantes de vehículos (como Seat, Volkswagen, Audi, BMW, Ford, Toyota u otros) son propiedad exclusiva de sus respectivos fabricantes.
+
+**Aviso de uso referencial legítimo (Uso Nominativo):**  
+La mención a dichas marcas comerciales, plataformas y fabricantes en este software y su documentación se realiza con fines estrictamente descriptivos, técnicos y de compatibilidad e interoperabilidad (*al amparo del Artículo 14 de la Directiva (UE) 2015/2436 sobre aproximación de las legislaciones de los Estados miembros en materia de marcas*). El uso de dichas denominaciones no implica en ningún caso patrocinio, afiliación, certificación ni respaldo por parte de sus respectivos titulares hacia BlackBird Launcher.

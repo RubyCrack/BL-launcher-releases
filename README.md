@@ -19,7 +19,7 @@
     <img src="https://img.shields.io/badge/Licencia-GPLv3-blue.svg?style=flat-square" alt="Licencia GPLv3" />
   </a>
   <a href="PRIVACY.md">
-    <img src="https://img.shields.io/badge/Privacidad-RGPD_Compliant-green.svg?style=flat-square" alt="Privacidad RGPD" />
+    <img src="https://img.shields.io/badge/Privacidad-Documentada-green.svg?style=flat-square" alt="Información de privacidad" />
   </a>
   <a href="https://github.com/RubyCrack/BL-launcher">
     <img src="https://img.shields.io/badge/Código_Fuente-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="Código Fuente en GitHub" />
@@ -60,7 +60,7 @@ Si ya tienes instalada una versión de **BlackBird Launcher**:
 
 ## 🔒 Integridad Criptográfica (SHA-256)
 
-Cada paquete APK publicado en las [Releases](../../releases/latest) incluye su correspondiente suma de verificación criptográfica (**SHA-256**). Se recomienda verificar la huella antes de instalar:
+Comprueba el **SHA-256** de cada APK frente al valor publicado en las notas de esa versión, cuando esté disponible:
 
 * **En macOS / Linux:**
   ```bash
@@ -71,7 +71,7 @@ Cada paquete APK publicado en las [Releases](../../releases/latest) incluye su c
   Get-FileHash app-release.apk -Algorithm SHA256
   ```
 
-Compara el hash generado con el publicado en las notas de la versión para confirmar que el binario no ha sufrido corrupciones ni alteraciones.
+Si la versión no publica SHA-256, no puede hacerse esta comparación. Cada release debe identificar además el commit o tag exacto del [código fuente correspondiente](https://github.com/RubyCrack/BL-launcher) y cómo compilarlo.
 
 ---
 
@@ -83,18 +83,18 @@ Compara el hash generado con el publicado en las notas de la versión para confi
 * **Privacidad Estricta en CAN y Bluetooth:** Anonimización de números de teléfono, contactos y exclusión de coordenadas GPS privadas en registros de diagnóstico.
 * **Escuchador de Notificaciones:** Sistema de arrendamiento atómico (`NotificationListenerLease`) y filtrado ultrarrápido (<1 µs) de guiado (Maps/Waze).
 * **Clima Resiliente:** Detección de saltos temporales del reloj (`ClockSanity`) y fusión inmutable CAN-Bus + API meteorológica.
-* **Consumo Cero en Segundo Plano:** Suspensión síncrona de animaciones y liberación de capas GPU en pausa (0.0% CPU/GPU).
+* **Segundo Plano:** Suspensión de animaciones y liberación de recursos gráficos al pausar la interfaz.
 
 ---
 
 ## ⚖️ Marco Legal, Privacidad y Seguridad Vial
 
-El uso de los binarios distribuidos en este repositorio está sujeto a las siguientes condiciones y descargos:
+Esta distribución incluye la licencia, la información de privacidad y los avisos siguientes:
 
 | Documento | Descripción |
 | :--- | :--- |
-| **[TERMS.md](TERMS.md)** | **Términos de Uso y Seguridad Vial:** Prohibición estricta de manipular la pantalla en marcha, descargo sobre la naturaleza referencial del velocímetro GPS, advertencia de legalidad de avisadores de radares (OpenStreetMap) y exención de responsabilidad civil (*AS IS*). |
-| **[PRIVACY.md](PRIVACY.md)** | **Política de Privacidad (RGPD / GDPR):** Declaración de ausencia de analítica o rastreadores de terceros (sin Firebase, sin AdMob). Tratamiento local de velocidad y audio FFT en memoria, y transferencias efímeras a Open-Meteo y Overpass. |
+| **[TERMS.md](TERMS.md)** | **Aviso de Uso y Seguridad Vial:** Reglas de atención al volante, límites de velocidad y radares, y condiciones de la licencia GPLv3 en la medida permitida por la ley. |
+| **[PRIVACY.md](PRIVACY.md)** | **Información de Privacidad:** Almacenamiento local, permisos, diagnósticos y consultas a Open-Meteo, Overpass, Google Maps y GitHub. No se afirma certificación RGPD. |
 | **[LICENSE](LICENSE)** | **Licencia de Software:** Distribuido bajo la licencia [GNU General Public License v3.0 (GPLv3)](LICENSE). |
 | **[ATTRIBUTIONS.md](ATTRIBUTIONS.md)** | **Atribuciones de Terceros:** Licencia de Bases de Datos Abiertas (ODbL) de © OpenStreetMap, datos de Open-Meteo, tipografía Montserrat (SIL OFL 1.1) y librerías de código abierto. |
 | **[SECURITY.md](SECURITY.md)** | **Política de Seguridad:** Procedimiento para el reporte responsable de incidencias de seguridad a través de GitHub Security Advisories. |

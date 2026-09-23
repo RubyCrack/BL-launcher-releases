@@ -1,109 +1,63 @@
-# Política de Privacidad — BlackBird Launcher (BL-Launcher)
+# Información de privacidad — BlackBird Launcher
 
 *Última actualización: 23 de septiembre de 2026*  
-*Aplicable a: BlackBird Launcher (versiones 3.x y superiores)*  
-*Conforme al Reglamento General de Protección de Datos de la Unión Europea (RGPD / GDPR - Reglamento UE 2016/679) y a la Ley Orgánica 3/2018 (LOPDGDD).*
+*Aplicable a: BlackBird Launcher 3.x*
 
----
+Este documento describe el tratamiento observado en la versión indicada. No afirma una certificación de conformidad con el RGPD. Los permisos de Android autorizan acceso técnico al dispositivo; por sí solos no constituyen consentimiento para todos los tratamientos.
 
-## 1. Responsable del Tratamiento
+## 1. Responsable y contacto
 
-El responsable del desarrollo y mantenimiento de **BlackBird Launcher** (en adelante, "la Aplicación") es Rubén (`RubyCrack`).
-* **Repositorio de código:** [RubyCrack/BL-launcher](https://github.com/RubyCrack/BL-launcher)
-* **Repositorio de distribución y releases:** [RubyCrack/BL-launcher-releases](https://github.com/RubyCrack/BL-launcher-releases)
-* **Canal de contacto y soporte:** Mediante incidencias públicas o privadas en el repositorio oficial de GitHub (`https://github.com/RubyCrack/BL-launcher/issues`).
+El proyecto lo mantiene Rubén (`RubyCrack`): [código fuente](https://github.com/RubyCrack/BL-launcher) y [descargas](https://github.com/RubyCrack/BL-launcher-releases). Las incidencias generales pueden comunicarse en [GitHub Issues](https://github.com/RubyCrack/BL-launcher/issues). **Las incidencias son públicas: no publiques allí ubicaciones, registros ni otros datos personales.** Actualmente no se publica un canal privado para solicitudes relativas a datos personales; esta vía de contacto sigue pendiente de habilitarse.
 
----
+## 2. Datos que procesa y conserva la aplicación
 
-## 2. Principio Rector: Privacidad por Diseño y Almacenamiento Cero
+BlackBird Launcher no exige cuenta, no usa un servidor propio de perfiles y no integra Firebase Analytics, Crashlytics ni publicidad. Esto no significa que todo el tratamiento sea efímero ni que los servicios de terceros carezcan de registros.
 
-BlackBird Launcher es un entorno de inicio (*launcher*) para sistemas de infoentretenimiento y pantallas de automoción (*Head Units*) basadas en Android 9.0 o superior.
+| Función | Datos y conservación local |
+| :--- | :--- |
+| Perfiles y ajustes | Preferencias locales, incluidas coordenadas predeterminadas si el usuario las configura. Permanecen hasta que se cambian o se borran los datos de la aplicación. |
+| Velocidad y telemetría | Lecturas GPS, CAN u OBD para mostrar el estado del vehículo. El cálculo ordinario se realiza en el dispositivo. |
+| Radares | Caché privada `radar_cache.json` con hasta cuatro zonas de consulta: coordenadas del centro, fecha de descarga y radares cercanos. No es un registro continuo de cada trayecto. Se reemplazan las zonas más antiguas al añadir otras; el archivo puede permanecer hasta borrar los datos de la aplicación. |
+| Tiempo | Caché en preferencias con temperatura, estado, ciudad y momento de la última consulta. No guarda las coordenadas GPS de cada consulta en esa caché, aunque pueden existir coordenadas configuradas en el perfil. |
+| Diagnóstico | Los registros CAN pueden iniciarse automáticamente según el ajuste, que actualmente está activado por defecto. Se guardan en almacenamiento privado con cuotas de archivos; los informes de fallos también se guardan localmente. Los textos de errores o diagnósticos pueden contener información contextual: revísalos antes de compartirlos. |
+| Exportaciones | Un registro exportado por el usuario a Descargas, USB u otra ubicación deja de depender del almacenamiento privado de la app. Borrar o desinstalar la app no garantiza borrar esas copias. |
 
-La arquitectura de la Aplicación ha sido diseñada bajo el principio de **privacidad por diseño y por defecto** (*Privacy by Design and by Default*):
-* **No requiere registro ni creación de cuenta de usuario.**
-* **No dispone de servidores propios ni bases de datos en la nube** para recopilar información de los usuarios.
-* **No incluye herramientas de telemetría invasiva, analítica de terceros ni redes publicitarias** (no contiene Google Firebase Analytics, Google Crashlytics, Facebook SDK, AdMob ni similares).
-* Todos los ajustes de personalización, perfiles de conductor y configuraciones se almacenan **única y exclusivamente en la memoria local del dispositivo**.
+Los registros CAN se limitan por número de archivos; los informes de fallo conservan hasta diez archivos. No se promete un plazo temporal único de eliminación para los archivos locales. Borrar los datos de la aplicación elimina sus archivos privados y preferencias; las copias exportadas deben borrarse por separado.
 
----
+## 3. Permisos y funciones
 
-## 3. Permisos del Dispositivo y Finalidad del Tratamiento
+- **Ubicación (`ACCESS_FINE_LOCATION`, `ACCESS_COARSE_LOCATION`):** velocímetro, mapa, tiempo y aviso de radares. Una consulta de tiempo o radares puede enviar ubicación a un tercero; el mapa usa Google Maps SDK cuando se abre.
+- **Audio (`RECORD_AUDIO`):** el visualizador de radio puede analizar mediante FFT la salida de audio que Android permite capturar durante la reproducción. La implementación no crea archivos de voz o sonido ni envía muestras de audio a un servidor. Según el dispositivo y la sesión de audio, la señal capturada puede incluir audio audible de otras aplicaciones; el permiso no se usa para una función de grabación de micrófono.
+- **Almacenamiento e imágenes:** selección de fondos y acceso a contenido multimedia usado por las funciones de la app. Android puede conceder un alcance de lectura mayor que una sola carpeta; la aplicación no declara un escaneo general de archivos personales.
+- **Aplicaciones y estadísticas de uso:** selección de apps, accesos directos e identificación de la app multimedia activa. La lista se procesa localmente.
+- **Acceso a notificaciones:** si el usuario habilita el servicio de escucha, la app puede recibir notificaciones del sistema. Usa datos de apps de navegación compatibles para mostrar indicaciones; el servicio también recibe metadatos técnicos de las notificaciones antes de filtrarlas.
+- **Bluetooth y sesiones multimedia:** estado de conexión y metadatos de reproducción para la interfaz. Los registros diagnósticos tratan de ocultar números, contactos e identificadores; revisa cualquier exportación antes de compartirla.
+- **Internet:** consultas de tiempo y radares, mapa y comprobación/descarga de actualizaciones.
 
-Para poder operar como lanzador del sistema e interactuar con el hardware del vehículo, la Aplicación solicita determinados permisos en Android. Cada uno de ellos se utiliza estrictamente para las funciones descritas:
+## 4. Servicios externos
 
-### A. Ubicación (`ACCESS_FINE_LOCATION` y `ACCESS_COARSE_LOCATION`)
-* **Finalidad principal (Local):** Cálculo en tiempo real de la velocidad satelital del vehículo (velocímetro analógico y digital en el salpicadero) mediante fusión de sensores GNSS. Este procesamiento se realiza íntegramente en la CPU del dispositivo.
-* **Finalidad secundaria (Consultas a servicios externos):**
-  1. **Previsión meteorológica:** Envío de las coordenadas geográficas (latitud y longitud) a la API pública de **Open-Meteo** para obtener temperatura, estado del cielo y previsión.
-  2. **Avisador de cinemómetros (radares):** Envío de un radio de coordenadas geográficas a la API pública de **Overpass (OpenStreetMap)** para descargar la posición de los radares fijos de la zona.
-* **Garantía de privacidad:** **En ningún caso se guardan historiales de ruta, trayectos realizados, paradas o patrones de movimiento.** Las coordenadas se descartan de la memoria RAM tras completar la consulta.
+Las solicitudes de red revelan al destino la dirección IP y datos técnicos de conexión. Una IP o unas coordenadas pueden constituir datos personales según el contexto. La app no controla la conservación que hagan los proveedores.
 
-### B. Micrófono / Entrada de Audio (`RECORD_AUDIO`)
-* **Finalidad:** Alimentar de forma visual el **espectro gráfico de ondas / ecualizador visual** del salpicadero mientras se reproduce música.
-* **Garantía de privacidad:**
-  * El flujo de audio se procesa en tiempo real mediante transformadas de Fourier (FFT) en memoria volátil para obtener barras de amplitud gráfica.
-  * **La Aplicación NUNCA graba, almacena, comprime ni transmite voz o sonido.** No se genera ningún archivo de audio en el almacenamiento ni se envía muestra alguna a través de la red.
+| Servicio | Uso y datos enviados o recogidos | Información del proveedor |
+| :--- | :--- | :--- |
+| [Open-Meteo](https://open-meteo.com/en/terms) — Suiza | La petición meteorológica incluye latitud y longitud con seis decimales. Open-Meteo indica que sus registros técnicos pueden contener coordenadas y que los elimina tras 90 días. | [Términos y privacidad](https://open-meteo.com/en/terms) |
+| [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) — instancia `overpass-api.de`, operada por FOSSGIS | La consulta de radares incluye el centro de búsqueda con latitud y longitud y un radio de 10 km. OpenStreetMap Foundation licencia los datos; no opera esta instancia. | [Instancias Overpass](https://wiki.openstreetmap.org/wiki/Overpass_API) |
+| [Google Maps SDK](https://developers.google.com/maps/documentation/android-sdk/play-data-disclosure) | Se usa cuando se muestra el mapa. Google informa de recogida automática de IP, identificador del dispositivo, metadatos y métricas de fallo por el SDK; pueden aplicarse otros tratamientos de Google Maps. | [Información del SDK](https://developers.google.com/maps/documentation/android-sdk/play-data-disclosure) y [privacidad de Google](https://policies.google.com/privacy) |
+| Geocodificación de Android | La resolución de ciudad a partir de coordenadas usa `Geocoder`. Según el dispositivo, este servicio puede usar red y un proveedor del sistema. | [Documentación Android](https://developer.android.com/reference/android/location/Geocoder) |
+| [GitHub Releases](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement) — EE. UU. | Petición de versión y descarga de APK al comprobar o instalar actualizaciones; GitHub recibe IP y datos técnicos de la petición. | [Privacidad de GitHub](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement) |
 
-### C. Almacenamiento y Archivos Multimedia (`READ_EXTERNAL_STORAGE`, `WRITE_EXTERNAL_STORAGE`, `READ_MEDIA_IMAGES`)
-* **Finalidad:** Permitir al usuario seleccionar fondos de pantalla personalizados de su almacenamiento local/USB y leer carátulas e información ID3 de pistas de música almacenadas en el vehículo.
-* **Garantía de privacidad:** La Aplicación no lee ni indexa archivos personales ajenos a las carpetas explícitamente configuradas por el usuario.
+La app no envía deliberadamente nombres, correo o identificadores del vehículo a Open-Meteo u Overpass. Esto no convierte en anónimos la IP o la ubicación transmitidas.
 
-### D. Aplicaciones Instaladas y Estadísticas de Uso (`QUERY_ALL_PACKAGES`, `PACKAGE_USAGE_STATS`)
-* **Finalidad:** Función esencial de cualquier *launcher*: enumerar las aplicaciones instaladas en el sistema para generar el cajón de aplicaciones (*App Drawer*), permitir accesos directos rápidos y detectar qué aplicación multimedia está en primer plano.
-* **Garantía de privacidad:** La lista de aplicaciones instaladas reside en la memoria local y jamás se transmite fuera del dispositivo.
+## 5. Base jurídica y derechos
 
-### E. Bluetooth (`BLUETOOTH`, `BLUETOOTH_CONNECT`, `BLUETOOTH_ADMIN`)
-* **Finalidad:** Conexión con el chip manos libres y audio A2DP del vehículo para mostrar el título de la canción en reproducción y el estado de la conexión.
-* **Garantía de privacidad:** Los identificadores de hardware (como direcciones MAC) y nombres de agenda telefónica son anonimizados u ofuscados en cualquier traza interna de depuración.
+El permiso de Android es un control de acceso, no una base jurídica universal del artículo 6 del RGPD. La base aplicable debe evaluarse por finalidad y por servicio antes de presentar este documento como declaración completa de conformidad. En particular, el acceso a ubicación y las consultas externas requieren información clara y control efectivo para el usuario.
 
-### F. Acceso a Internet y Estado de Red (`INTERNET`, `ACCESS_NETWORK_STATE`)
-* **Finalidad:** Permitir las consultas a los servicios meteorológicos, descarga de radares y comprobación de actualizaciones de la aplicación.
+Cuando corresponda el RGPD, pueden ejercerse los derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad, así como presentar una reclamación ante la autoridad de protección de datos competente. Revocar permisos, borrar datos o desinstalar la aplicación detiene o elimina tratamientos locales futuros, pero no borra automáticamente registros ya conservados por terceros ni copias exportadas. Consulta también las políticas de los proveedores indicados arriba.
 
----
+## 6. Cambios
 
-## 4. Transferencias de Datos a Terceros (Servicios Externos)
+Las versiones nuevas de esta información se publicarán en los repositorios del proyecto. Las condiciones de los servicios externos pueden cambiar independientemente.
 
-Al utilizar funciones que requieren conexión a Internet, la Aplicación interactúa con los siguientes servicios de terceros. Al realizar una petición HTTP, el servidor de destino recibe técnicamente la dirección IP pública del dispositivo y las cabeceras estándar de red:
+## English summary
 
-| Servicio | Proveedor | Finalidad | Datos enviados | Política de privacidad del tercero |
-| :--- | :--- | :--- | :--- | :--- |
-| **Open-Meteo** | Open-Meteo GmbH (Alemania / UE) | Previsión del tiempo | Latitud y longitud aproximadas | [Política de Open-Meteo](https://open-meteo.com/en/features#privacy) |
-| **Overpass API** | OpenStreetMap Foundation (Reino Unido / UE) | Nodos de radares fijos | Coordenadas de búsqueda / Bounding box | [Política de OSMF](https://wiki.osmfoundation.org/wiki/Privacy_Policy) |
-| **GitHub Releases API** | GitHub, Inc. / Microsoft (EE. UU.) | Comprobación de actualizaciones OTA | Solicitud HTTP GET estándar de versión | [Política de GitHub](https://docs.github.com/es/site-policy/privacy-policies/github-general-privacy-statement) |
-
-*Ninguno de estos servicios recibe datos de identificación personal, nombres, cuentas de correo o identificadores de hardware del vehículo.*
-
----
-
-## 5. Base Jurídica del Tratamiento (RGPD)
-
-El tratamiento de los datos técnicos descritos se fundamenta en:
-* **Ejecución de la relación contractual o de uso (Art. 6.1.b RGPD):** Necesario para que la aplicación preste las funciones solicitadas por el usuario (mostrar velocidad, tiempo y aplicaciones).
-* **Consentimiento expreso del usuario (Art. 6.1.a RGPD):** Otorgado mediante el diálogo de permisos del sistema operativo Android para el acceso al GPS, audio y almacenamiento.
-
----
-
-## 6. Derechos del Usuario (Derechos ARCO / RGPD)
-
-De conformidad con los artículos 15 a 22 del RGPD, el usuario ostenta los derechos de acceso, rectificación, supresión, limitación del tratamiento y portabilidad.
-
-**Nota práctica sobre el ejercicio de derechos:** Dado que BlackBird Launcher **no almacena ningún dato personal en servidores externos ni perfiles de usuario**, el ejercicio de sus derechos de supresión y revocación de datos se materializa de forma inmediata y autónoma por el propio usuario:
-1. Revocando los permisos concedidos desde los Ajustes del sistema de Android (`Ajustes > Aplicaciones > BlackBird Launcher > Permisos`).
-2. Borrando los datos y la memoria caché de la aplicación (`Ajustes > Aplicaciones > BlackBird Launcher > Almacenamiento > Borrar datos`).
-3. Desinstalando la Aplicación del dispositivo.
-
----
-
-## 7. Cambios en esta Política
-
-Cualquier modificación futura de esta política se publicará en los repositorios oficiales de GitHub indicados en el encabezado. Se recomienda revisar el documento periódicamente o al instalar actualizaciones importantes.
-
----
-
-## English Summary (Non-binding Convenience Translation)
-
-* **Zero Cloud Storage:** BlackBird Launcher does not run any private servers or user databases. All settings and driver profiles remain on your vehicle's head unit.
-* **No Tracking / No Analytics:** No Firebase, Google Analytics, telemetry SDKs, or advertising networks are included.
-* **Location Data:** GPS coordinates are processed locally for the speedometer and sent transiently to Open-Meteo (weather) and Overpass API (OSM speed cameras). No travel history or location breadcrumbs are saved.
-* **Audio Visualizer:** The `RECORD_AUDIO` permission is solely used to compute real-time visual waveform spectrum bars on the dashboard. No voice or audio is ever recorded, stored, or streamed.
-* **OTA Updates:** Automated update checks query the public GitHub API for the latest release.
+BlackBird Launcher does not require an account or run its own profile server. It keeps settings, optional configured coordinates, weather data, up to four radar query zones and local diagnostic files on the device. Weather and radar requests send precise location to external providers. Google Maps SDK and Android Geocoder may process additional technical or location data when used. Android permissions alone are not a blanket GDPR consent. Uninstalling the app does not delete third-party logs or files the user exported.
