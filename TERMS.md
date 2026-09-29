@@ -1,6 +1,6 @@
 # Términos de Uso y Descargo de Seguridad Vial — BlackBird Launcher
 
-*Última actualización: 23 de septiembre de 2026*  
+*Última actualización: 30 de septiembre de 2026*  
 *Aplicable a: BlackBird Launcher (BL-Launcher)*  
 *Licencia de software: GNU General Public License v3.0 (GPLv3)*
 
@@ -16,7 +16,7 @@ Este documento informa sobre límites técnicos y riesgos de uso de **BlackBird 
 
 > ### ⚠️ ATENCIÓN: PRIORIZA LA CONDUCCIÓN
 >
-> 1. **No manipules la pantalla en marcha.** Configura la app y selecciona perfiles con el vehículo detenido en un lugar seguro.
+> 1. **No manipules la pantalla en marcha.** Configura la app, selecciona perfiles o ejecuta actualizaciones con el vehículo detenido en un lugar seguro.
 > 2. Respeta la normativa de tráfico aplicable y atiende siempre a la vía, las señales y los instrumentos homologados del vehículo.
 > 3. Esta advertencia no excluye responsabilidades que la ley no permita excluir.
 
@@ -41,7 +41,7 @@ Este documento informa sobre límites técnicos y riesgos de uso de **BlackBird 
 ## 5. Integración con el Hardware del Vehículo (MCU y Bus CAN)
 
 1. La Aplicación se comunica con servicios de la pantalla y recibe datos CAN para funciones de visualización y diagnóstico. También puede enviar acciones a componentes de la pantalla, como la radio FM; no se presenta como sistema de control homologado del vehículo.
-2. Debido a la inmensa diversidad de modelos, años y configuraciones electrónicas de vehículos y fabricantes de placas (*head units* como Jancar, Autochips, MediaTek AC8257, etc.), **no se garantiza la total compatibilidad ni la ausencia de conflictos de software**.
+2. Debido a la inmensa diversidad de modelos, años y configuraciones electrónicas de vehículos y fabricantes de placas (*head units* como Jancar, Autochips, MediaTek AC8257, etc.), **no se garantiza la total compatibilidad ni la ausencia de conflictos de software**. El desarrollo, calibración y pruebas de validación se realizan específicamente sobre hardware **MediaTek AC8257 / Jancar (Android 9.0, API 28)**; en otros modelos de autorradio, procesadores o versiones de sistema el rendimiento, fluidez y respuesta de hardware pueden variar.
 3. Instala la aplicación solo en equipos compatibles y comprueba su comportamiento con el vehículo detenido. La licencia GPLv3 establece las limitaciones de garantía y responsabilidad en la medida permitida por la ley aplicable.
 
 ---
