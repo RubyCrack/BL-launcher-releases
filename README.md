@@ -13,9 +13,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Versión-v3.7.7_Estable-success?style=flat-square" alt="Versión Estable" />
-  <a href="../../releases">
-    <img src="https://img.shields.io/badge/Canal_Beta-v3.8.0--beta-orange?style=flat-square" alt="Canal Beta" />
-  </a>
+  <img src="https://img.shields.io/badge/Beta-v3.8.0_Pre--release-blueviolet?style=flat-square" alt="Versión Beta" />
   <img src="https://img.shields.io/badge/Plataforma-Android%209.0%2B%20(API%2028)-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Android 9.0+" />
   <img src="https://img.shields.io/badge/Hardware-AC8257%20%2F%20Jancar-C23B22?style=flat-square" alt="Hardware Objetivo" />
   <img src="https://img.shields.io/badge/Canal-Oficial_OTA-orange?style=flat-square" alt="Canal OTA" />
@@ -35,26 +33,28 @@
 ## 📥 Descarga e Instalación
 
 ### Método 1: Actualización Automática OTA (Recomendado)
-Si ya tienes instalada cualquier versión de **BlackBird Launcher**:
+Si ya tienes instalada una versión de **BlackBird Launcher**:
 1. Conecta la autorradio a una red Wi-Fi o punto de acceso móvil.
 2. Abre **Ajustes ➔ Sistema ➔ Actualización** en BlackBird Launcher.
 3. Elige tu canal preferido:
    * **Estable:** Recibe exclusivamente versiones definitivas y consolidadas para el día a día.
    * **Beta:** Recibe versiones preliminares (*pre-releases*) con las últimas características antes de su despliegue general.
-4. Pulsa **COMPROBAR**: la aplicación detectará automáticamente la versión más reciente en este repositorio, verificará su integridad criptográfica (SHA-256) y te guiará para instalarla directamente en pantalla.
+4. Pulsa **COMPROBAR**: la aplicación detectará automáticamente si hay una nueva versión publicada en este repositorio, verificará su integridad criptográfica (SHA-256), soportará descargas reanudables ante cortes de red (cabecera HTTP Range) y te guiará para instalarla directamente en pantalla.
 
-* **Reanudación ante cortes de contacto:** Si el motor se apaga o se pierde la cobertura 4G/Wi-Fi durante la descarga, el archivo parcial no se pierde. Al volver a encender el coche, la descarga se restaura en pausa y reanuda exactamente desde el último byte descargado mediante cabeceras HTTP `Range`.
+El canal **Estable** está seleccionado por defecto y consulta la última release pública. Si seleccionas **Beta**, buscará tanto pre-releases como versiones estables, ofreciendo la que posea el `versionCode` más alto. Puedes alternar de canal en cualquier momento desde Ajustes.
 
 > [!IMPORTANT]
-> **Seguridad en Marcha:** Por normativa de seguridad HMI, las operaciones de actualización y confirmación de instalación requieren que el vehículo se encuentre completamente detenido.
+> **Seguridad en Marcha:** Por normativa de seguridad vial y diseño HMI automotriz, las operaciones de actualización y confirmación de instalación requieren que el vehículo se encuentre completamente detenido.
+
+Para que una release de cualquiera de los dos canales se ofrezca vía OTA, debe incluir `versionCode: N` en su descripción y un APK con digest SHA-256 publicado en los metadatos de GitHub Releases. El actualizador comprueba además el tamaño, el paquete, la firma criptográfica y que la versión sea posterior a la instalada. Las releases en borrador no se ofrecen.
 
 ---
 
 ### Método 2: Instalación Manual por APK
 1. Descarga el paquete `app-release.apk` de la versión más reciente desde la sección [Releases](../../releases/latest).
-2. Copia el archivo a una memoria USB (formateada en FAT32 o NTFS) o descárgalo directamente desde el navegador de la autorradio.
-3. Conecta el USB a la pantalla, abre el explorador de archivos nativo y pulsa sobre el APK para instalarlo (habilita *«Instalar aplicaciones de fuentes desconocidas»* si el sistema lo solicita).
-4. Pulsa el botón físico o táctil **HOME** de la consola y selecciona **BlackBird** como aplicación de inicio predeterminada (*«Siempre»*).
+2. Copia el archivo a una memoria USB (formateada en FAT32 o NTFS) o descárgalo directamente desde el navegador web de la autorradio.
+3. Conecta el USB a la pantalla, abre el explorador de archivos nativo, pulsa sobre el APK e instala la aplicación (habilita la opción de *Instalar aplicaciones de fuentes desconocidas* si el sistema lo solicita).
+4. Pulsa el botón físico o táctil **HOME** de la consola o del volante y selecciona **BlackBird** como aplicación de inicio predeterminada (*«Siempre»*).
 
 ---
 
@@ -69,12 +69,11 @@ Si ya tienes instalada cualquier versión de **BlackBird Launcher**:
 | **Radio FM/AM Física** | **Soportado** | Control directo del chip sintonizador de la placa base vía interfaz Binder IPC. |
 | **Bluetooth OEM** | **Soportado** | Manos libres y streaming mediante el servicio de audio del fabricante. |
 | **Bus CAN Nativo** | **Soportado** | Lectura pasiva de telemetría (odómetro, combustible), marcha atrás e iluminación. |
-| **Posicionamiento GNSS** | **Nativo** | Fusión satelital continua con amortiguación de fluctuaciones y auto-recuperación de proveedores. |
-| **Telemetría Torque / OBD-II** | **Soportado** | Lectura de parámetros de motor en tiempo real mediante adaptadores ELM327 (Bluetooth y USB). |
+| **Posicionamiento GNSS** | **Nativo** | Fusión satelital continua con amortiguación de fluctuaciones e interpolación temporal (delta-time). |
 
 > [!NOTE]
 > **Aviso de Rendimiento y Plataforma de Validación:**
-> BlackBird Launcher está calibrado, perfilado y probado exhaustivamente en bancos de pruebas reales con hardware **MediaTek AC8257 / Jancar en Android 9.0 (API 28)**. Aunque la aplicación es técnicamente compatible con otros sistemas Android (hasta Android 12), **el rendimiento óptimo (cadencia calibrada a 30 FPS con aguja amortiguada por delta de tiempo, bajo consumo de CPU y protección térmica activa en tres fases) y la integración directa de hardware (control del sintonizador analógico por IPC, decodificación pasiva de bus CAN y sincronización LED de consola)** solo pueden garantizarse en el hardware objetivo de referencia. En autorradios con otros procesadores (como Allwinner, Rockchip o Unisoc) o ROMs personalizadas de otros fabricantes, el comportamiento, la compatibilidad con el bus CAN y la fluidez pueden variar significativamente.
+> BlackBird Launcher está calibrado, perfilado y validado exhaustivamente en bancos de pruebas reales con hardware **MediaTek AC8257 / Jancar en Android 9.0 (API 28)**. Para garantizar la estabilidad térmica y evitar *throttling* en pantallas empotradas en salpicaderos, el motor de renderizado opera bajo un presupuesto térmico dinámico de **30 FPS con interpolación continua de cuadros (delta-time)**, lo que permite un desplazamiento analógico suave de las agujas sin recalentar la CPU ni la VRAM. En autorradios con procesadores alternativos (Allwinner, Rockchip, Unisoc) o ROMs genéricas de otros fabricantes, la compatibilidad con el chip de radio o la decodificación del bus CAN puede variar según la capa de servicios del fabricante.
 
 ---
 
@@ -91,26 +90,42 @@ El actualizador OTA comprueba automáticamente el hash criptográfico de cada ar
   Get-FileHash app-release.apk -Algorithm SHA256
   ```
 
+Cada release identifica además el commit o tag exacto del [código fuente correspondiente](https://github.com/RubyCrack/BL-launcher) y el procedimiento para reproducir la compilación.
+
 ---
 
 ## 📋 Registro de Versiones Reciente
 
-### [v3.7.7 (Release Oficial)](../../releases/tag/v3.7.7)
-* **Telemetría y Diagnóstico OBD-II Integrado:** Integración completa con adaptadores ELM327 (Bluetooth y USB), lectura de parámetros en vivo (temperatura de refrigerante, carga de motor, admisión, voltaje, presión MAP y acelerador) con reconexión automática ante cortes de encendido.
-* **Blindaje de Ciclo de Vida y Reposo:** Aislamiento transaccional ante cortes de alimentación (`powerRevision`), eliminación de hilos zombi de radio FM y purga de llamadas de reproducción al apagar el contacto.
-* **Ergonomía HMI en Ajustes:** Reorganización en pestañas laterales temáticas inspiradas en CarPlay, soporte para 9 identidades cromáticas completas y controles de brillo desacoplados.
-* **Validación Masiva:** Certificada con más de 2.710 pruebas unitarias y de integración superadas (0 fallos).
+### [v3.8.0 (Canal Beta / Pre-release)](../../releases/tag/v3.8.0)
+* **Ordenador de Viaje Resiliente a Sleep:** Blindaje de `TripComputer` frente a suspensiones profundas de la MCU del coche, evitando acumulación espuria de tiempo o distancias irreales al despertar.
+* **Presupuesto Térmico Dinámico en Agujas:** Reducción adaptativa de tasa de refresco a nivel de vista ante calentamiento prolongado del salpicadero, manteniendo fluidez visual sin saturar la GPU.
+* **Fusión GPS de Precisión:** Salto y validación cinemática calculados a partir del intervalo temporal real entre muestras satelitales en vez del pulso del planificador.
+* **Descargas OTA Reanudables:** Soporte de cabecera HTTP `Range` (206 Partial Content) para reanudar descargas de paquetes interrumpidas por pérdida momentánea de cobertura 4G/Wi-Fi sin reiniciar desde cero.
 
-### [v3.7.6 "Jazz" (Release Oficial)](../../releases/tag/v3.7.6)
-* **Rediseño Integral de Multimedia:** Efecto de vinilo giratorio en capa hardware dedicada (`LAYER_TYPE_HARDWARE`), halo dinámico de carátula desacoplado y compatibilidad con carátulas de alta resolución sin fugas de memoria.
-* **Navegador Visual de Listas Spotify:** Explorador táctil de playlists, vista de cola y persistencia segura de tokens sin sobrecoste de CPU.
-* **Superficies Neutras de 16dp:** Estandarización de radios de esquina, elevación de contraste diurno (`#CCFFFFFF`) y protección del velocímetro contra tintes de alerta.
+### [v3.7.7 (Release Oficial)](../../releases/tag/v3.7.7)
+* **Estabilización del Motor OTA:** Sincronización atómica de hilos en segundo plano durante la verificación y descompresión de paquetes.
+* **Optimización de Memoria en Redes Wi-Fi:** Eliminación de bloqueos de interfaz mediante caché de paleta en memoria en `WifiAdapter`.
+* **Sincronización de Bus CAN:** Resincronización robusta de estados de cabina, puertas e iluminación tras pausas de la pantalla.
+
+### [v3.7.6 (Release Oficial — "Jazz")](../../releases/tag/v3.7.6)
+* **Mitigación Térmica Proactiva:** Balanceo de carga en segundo plano para unidades empotradas de disipación pasiva.
+* **Visualizador de Audio en Tiempo Real:** Optimización del buffer FFT en el módulo de radio FM para captura sonora de baja latencia.
+* **Compatibilidad Bluetooth OEM:** Mejora en el desacoplo de reconexión de perfiles manos libres y streaming multimedia A2DP.
 
 ### [v3.7.5 (Release Oficial)](../../releases/tag/v3.7.5)
 * **Motor de Radares Headless:** Detección de cinemómetros continua en segundo plano unificada para todos los cuadros (Classic, Card y Performance), sin depender de Google Maps ni consumir memoria de vídeo.
-* **Aguja Analógica Amortiguada:** Interpolación cinemática fluida mediante animador finito por delta de tiempo, eliminando tirones entre tramas de señal GPS y CAN.
-* **Actualizador OTA Integrado:** Comprobación, descarga reanudable con soporte HTTP Range, verificación SHA-256 y selector táctil de canales (**Estable** vs **Beta**).
+* **Aguja Analógica Fluida (30 FPS con Delta-Time):** Interpolación cinemática crítica que elimina tirones entre tramas de señal GPS y CAN.
+* **Actualizador OTA Integrado:** Selector táctil de canales (**Estable** vs **Beta**), verificación SHA-256 obligatoria y comprobación de firma criptográfica.
 * **Tipografía Inter y Estética CarPlay:** Estandarización de la tipografía **Inter** (Regular, Medium, Bold), esquinas redondeadas uniformes a 16dp y elevación de contraste diurno (`#CCFFFFFF`).
+* **Nuevos Temas y Mapas Vectoriales:** Incorporación de **Sport Red** y **Cyber Purple** con perfiles JSON dedicados para Google Maps y blindaje de seguridad HMI en velocímetro.
+
+### [v3.7.4 (Release Oficial)](../../releases/tag/v3.7.4)
+* **Coordinador de Reanudación (`HomeResumeCoordinator`):** Sincronización atómica de perfiles al volver a primer plano y supresión síncrona en marcha atrás.
+* **Telemetría de Velocidad:** Reconciliación de frescura al reanudar y distinción matemática entre 0 km/h y señal no disponible (`--`).
+* **Privacidad Estricta en CAN y Bluetooth:** Anonimización de números de teléfono, contactos y exclusión de coordenadas GPS privadas en registros de diagnóstico.
+* **Escuchador de Notificaciones:** Sistema de arrendamiento atómico (`NotificationListenerLease`) y filtrado ultrarrápido (<1 µs) de guiado (Maps/Waze).
+* **Clima Resiliente:** Detección de saltos temporales del reloj (`ClockSanity`) y fusión inmutable CAN-Bus + API meteorológica.
+* **Segundo Plano:** Suspensión de animaciones y liberación de recursos gráficos al pausar la interfaz.
 
 ---
 
@@ -121,9 +136,9 @@ Esta distribución incluye la licencia, la información de privacidad y los avis
 | Documento | Descripción |
 | :--- | :--- |
 | **[TERMS.md](TERMS.md)** | **Aviso de Uso y Seguridad Vial:** Reglas de atención al volante, límites de velocidad y radares, y condiciones de la licencia GPLv3 en la medida permitida por la ley. |
-| **[PRIVACY.md](PRIVACY.md)** | **Información de Privacidad:** Almacenamiento local, permisos, diagnósticos y consultas a Open-Meteo, Overpass, Google Maps y GitHub. |
+| **[PRIVACY.md](PRIVACY.md)** | **Información de Privacidad:** Almacenamiento local, permisos, diagnósticos y consultas a Open-Meteo, Overpass, Google Maps y GitHub. No se afirma certificación RGPD. |
 | **[LICENSE](LICENSE)** | **Licencia de Software:** Distribuido bajo la licencia [GNU General Public License v3.0 (GPLv3)](LICENSE). |
-| **[ATTRIBUTIONS.md](ATTRIBUTIONS.md)** | **Atribuciones de Terceros:** Licencia de Bases de Datos Abiertas (ODbL) de © OpenStreetMap, datos de Open-Meteo, tipografía Inter (SIL OFL 1.1) de Rasmus Andersson, alias de compatibilidad Montserrat y librerías de código abierto. |
+| **[ATTRIBUTIONS.md](ATTRIBUTIONS.md)** | **Atribuciones de Terceros:** Licencia de Bases de Datos Abiertas (ODbL 1.0) de © OpenStreetMap (radares Overpass), datos de Open-Meteo, tipografía Inter (SIL OFL 1.1) y librerías de código abierto. |
 | **[SECURITY.md](SECURITY.md)** | **Política de Seguridad:** Procedimiento para el reporte responsable de incidencias de seguridad a través de GitHub Security Advisories. |
 
 ---
