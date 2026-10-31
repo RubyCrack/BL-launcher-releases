@@ -4,12 +4,13 @@ BlackBird Launcher utiliza y se apoya en datos abiertos, recursos tipográficos 
 
 ---
 
-## 1. Datos Geográficos y Cartografía
+## 1. Datos Geográficos y Telemétricos de Terceros
 
-### OpenStreetMap y Overpass API
-* **Uso en la aplicación:** Consulta de posiciones de cinemómetros y puntos de control de velocidad para el módulo *SafeRoute / Radar Runtime*.
+### Detección de Radares: OpenStreetMap y Overpass API
+* **Uso exclusivo en la aplicación:** Consulta y geolocalización de cinemómetros (radares fijos, de tramo y de semáforo) para el motor de seguridad vial en segundo plano (*SafeRoute / Radar Runtime*).
+* **Aclaración sobre la cartografía:** BlackBird Launcher **no** utiliza OpenStreetMap para el renderizado visual de mapas, mosaicos de calles ni navegación (dichas funciones se proporcionan a través del SDK de Google Maps). Los datos de OpenStreetMap se emplean única y exclusivamente para la detección de radares a través de la API pública comunitaria Overpass.
 * **Aviso de copyright:** **© Colaboradores de OpenStreetMap**
-* **Licencia:** Los datos geográficos de OpenStreetMap se distribuyen bajo la **Licencia de Bases de Datos Abiertas (ODbL)** de la Fundación OpenStreetMap (OSMF). La instancia `overpass-api.de` que atiende las consultas de radar está operada por FOSSGIS; OSMF no opera esa instancia.
+* **Licencia:** Los datos de radares de OpenStreetMap se distribuyen bajo la **Licencia de Bases de Datos Abiertas (ODbL 1.0)** de la Fundación OpenStreetMap (OSMF). La instancia `overpass-api.de` que atiende las consultas está operada por FOSSGIS e.V.; OSMF no opera dicha instancia.
 * **Más información:** [https://www.openstreetmap.org/copyright](https://www.openstreetmap.org/copyright)
 
 ### Open-Meteo
@@ -21,11 +22,12 @@ BlackBird Launcher utiliza y se apoya en datos abiertos, recursos tipográficos 
 
 ## 2. Tipografías
 
-### Montserrat Font Family
-* **Diseño:** Julieta Ulanovsky, Sol Matas, Juan Pablo del Peral, Jacques Le Bailly.
+### Inter Font Family (CarPlay HMI Aesthetic)
+* **Diseño:** Rasmus Andersson y los autores del proyecto Inter.
 * **Licencia:** **SIL Open Font License, Version 1.1 (OFL-1.1)**.
-* **Términos:** Este tipo de letra está licenciado bajo la SIL Open Font License 1.1, que permite su uso, estudio, modificación y redistribución libre siempre que no se venda de forma aislada.
+* **Términos:** Este tipo de letra está licenciado bajo la SIL Open Font License 1.1, que permite su uso, estudio, modificación y redistribución libre en aplicaciones comerciales y de código abierto sin coste alguno.
 * **Texto de la licencia:** [SIL Open Font License 1.1](https://openfontlicense.org/open-font-license-official-text/)
+* **Repositorio oficial:** [rsms/inter](https://github.com/rsms/inter)
 
 ---
 
@@ -35,7 +37,7 @@ Las siguientes librerías de software están incorporadas o vinculadas en BlackB
 
 ### Apache License, Version 2.0
 Las siguientes librerías están licenciadas bajo los términos de la **Apache License, Version 2.0**:
-* **Android Jetpack / AndroidX** (Activity KTX, AppCompat, ConstraintLayout, Core KTX, Lifecycle, Media, Palette, ProfileInstaller) — *Copyright (C) The Android Open Source Project*
+* **Android Jetpack / AndroidX** (Activity KTX, AppCompat, ConstraintLayout, Core KTX, Lifecycle Runtime & ViewModel KTX, Media, Palette KTX, ProfileInstaller) — *Copyright (C) The Android Open Source Project*
 * **Material Components for Android** — *Copyright (C) Google LLC*
 * **KotlinX Coroutines Android** — *Copyright (C) 2010-2024 JetBrains s.r.o.*
 * **OkHttp** — *Copyright (C) 2012-2024 Square, Inc.*
@@ -64,6 +66,9 @@ limitations under the License.
 ## 4. Herramientas de Verificación y Testing
 
 * **JUnit 4** — Licenciado bajo la *Eclipse Public License 1.0 (EPL-1.0)*.
+* **MockK** — Licenciado bajo la *Apache License 2.0*.
+* **Robolectric** — Licenciado bajo la *Apache License 2.0*.
+* **KotlinX Coroutines Test** — Licenciado bajo la *Apache License 2.0*.
 * **AndroidX Test / Espresso** — Licenciado bajo la *Apache License 2.0*.
 
 ---
