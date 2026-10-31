@@ -12,7 +12,10 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Versión-v3.7.5_Estable-success?style=flat-square" alt="Versión Estable" />
+  <img src="https://img.shields.io/badge/Versión-v3.7.7_Estable-success?style=flat-square" alt="Versión Estable" />
+  <a href="../../releases">
+    <img src="https://img.shields.io/badge/Canal_Beta-v3.8.0--beta-orange?style=flat-square" alt="Canal Beta" />
+  </a>
   <img src="https://img.shields.io/badge/Plataforma-Android%209.0%2B%20(API%2028)-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Android 9.0+" />
   <img src="https://img.shields.io/badge/Hardware-AC8257%20%2F%20Jancar-C23B22?style=flat-square" alt="Hardware Objetivo" />
   <img src="https://img.shields.io/badge/Canal-Oficial_OTA-orange?style=flat-square" alt="Canal OTA" />
@@ -40,6 +43,8 @@ Si ya tienes instalada cualquier versión de **BlackBird Launcher**:
    * **Beta:** Recibe versiones preliminares (*pre-releases*) con las últimas características antes de su despliegue general.
 4. Pulsa **COMPROBAR**: la aplicación detectará automáticamente la versión más reciente en este repositorio, verificará su integridad criptográfica (SHA-256) y te guiará para instalarla directamente en pantalla.
 
+* **Reanudación ante cortes de contacto:** Si el motor se apaga o se pierde la cobertura 4G/Wi-Fi durante la descarga, el archivo parcial no se pierde. Al volver a encender el coche, la descarga se restaura en pausa y reanuda exactamente desde el último byte descargado mediante cabeceras HTTP `Range`.
+
 > [!IMPORTANT]
 > **Seguridad en Marcha:** Por normativa de seguridad HMI, las operaciones de actualización y confirmación de instalación requieren que el vehículo se encuentre completamente detenido.
 
@@ -65,10 +70,11 @@ Si ya tienes instalada cualquier versión de **BlackBird Launcher**:
 | **Bluetooth OEM** | **Soportado** | Manos libres y streaming mediante el servicio de audio del fabricante. |
 | **Bus CAN Nativo** | **Soportado** | Lectura pasiva de telemetría (odómetro, combustible), marcha atrás e iluminación. |
 | **Posicionamiento GNSS** | **Nativo** | Fusión satelital continua con amortiguación de fluctuaciones y auto-recuperación de proveedores. |
+| **Telemetría Torque / OBD-II** | **Soportado** | Lectura de parámetros de motor en tiempo real mediante adaptadores ELM327 (Bluetooth y USB). |
 
 > [!NOTE]
 > **Aviso de Rendimiento y Plataforma de Validación:**
-> BlackBird Launcher está calibrado, perfilado y probado exhaustivamente en bancos de pruebas reales con hardware **MediaTek AC8257 / Jancar en Android 9.0 (API 28)**. Aunque la aplicación es técnicamente compatible y puede instalarse en otros sistemas Android (hasta Android 12), **el rendimiento óptimo (60 FPS sostenidos, aguja continua, consumo mínimo de CPU/VRAM) y la integración directa de hardware (control del chip sintonizador por IPC, decodificación pasiva de bus CAN y sincronización LED de consola) solo pueden garantizarse en el hardware objetivo de referencia**. En autorradios con otros procesadores (como Allwinner, Rockchip o Unisoc) o ROMs personalizadas de otros fabricantes, el comportamiento, la compatibilidad con el bus CAN y la fluidez pueden variar significativamente.
+> BlackBird Launcher está calibrado, perfilado y probado exhaustivamente en bancos de pruebas reales con hardware **MediaTek AC8257 / Jancar en Android 9.0 (API 28)**. Aunque la aplicación es técnicamente compatible con otros sistemas Android (hasta Android 12), **el rendimiento óptimo (cadencia calibrada a 30 FPS con aguja amortiguada por delta de tiempo, bajo consumo de CPU y protección térmica activa en tres fases) y la integración directa de hardware (control del sintonizador analógico por IPC, decodificación pasiva de bus CAN y sincronización LED de consola)** solo pueden garantizarse en el hardware objetivo de referencia. En autorradios con otros procesadores (como Allwinner, Rockchip o Unisoc) o ROMs personalizadas de otros fabricantes, el comportamiento, la compatibilidad con el bus CAN y la fluidez pueden variar significativamente.
 
 ---
 
@@ -89,22 +95,22 @@ El actualizador OTA comprueba automáticamente el hash criptográfico de cada ar
 
 ## 📋 Registro de Versiones Reciente
 
+### [v3.7.7 (Release Oficial)](../../releases/tag/v3.7.7)
+* **Telemetría y Diagnóstico OBD-II Integrado:** Integración completa con adaptadores ELM327 (Bluetooth y USB), lectura de parámetros en vivo (temperatura de refrigerante, carga de motor, admisión, voltaje, presión MAP y acelerador) con reconexión automática ante cortes de encendido.
+* **Blindaje de Ciclo de Vida y Reposo:** Aislamiento transaccional ante cortes de alimentación (`powerRevision`), eliminación de hilos zombi de radio FM y purga de llamadas de reproducción al apagar el contacto.
+* **Ergonomía HMI en Ajustes:** Reorganización en pestañas laterales temáticas inspiradas en CarPlay, soporte para 9 identidades cromáticas completas y controles de brillo desacoplados.
+* **Validación Masiva:** Certificada con más de 2.710 pruebas unitarias y de integración superadas (0 fallos).
+
+### [v3.7.6 "Jazz" (Release Oficial)](../../releases/tag/v3.7.6)
+* **Rediseño Integral de Multimedia:** Efecto de vinilo giratorio en capa hardware dedicada (`LAYER_TYPE_HARDWARE`), halo dinámico de carátula desacoplado y compatibilidad con carátulas de alta resolución sin fugas de memoria.
+* **Navegador Visual de Listas Spotify:** Explorador táctil de playlists, vista de cola y persistencia segura de tokens sin sobrecoste de CPU.
+* **Superficies Neutras de 16dp:** Estandarización de radios de esquina, elevación de contraste diurno (`#CCFFFFFF`) y protección del velocímetro contra tintes de alerta.
+
 ### [v3.7.5 (Release Oficial)](../../releases/tag/v3.7.5)
 * **Motor de Radares Headless:** Detección de cinemómetros continua en segundo plano unificada para todos los cuadros (Classic, Card y Performance), sin depender de Google Maps ni consumir memoria de vídeo.
-* **Aguja Analógica a 60 FPS:** Interpolación cinemática fluida mediante animador finito, eliminando tirones entre tramas de señal GPS y CAN.
+* **Aguja Analógica Amortiguada:** Interpolación cinemática fluida mediante animador finito por delta de tiempo, eliminando tirones entre tramas de señal GPS y CAN.
 * **Actualizador OTA Integrado:** Comprobación, descarga reanudable con soporte HTTP Range, verificación SHA-256 y selector táctil de canales (**Estable** vs **Beta**).
 * **Tipografía Inter y Estética CarPlay:** Estandarización de la tipografía **Inter** (Regular, Medium, Bold), esquinas redondeadas uniformes a 16dp y elevación de contraste diurno (`#CCFFFFFF`).
-* **Nuevos Temas y Mapas Vectoriales:** Incorporación de **Sport Red** y **Cyber Purple** con perfiles JSON dedicados para Google Maps y blindaje de seguridad HMI en velocímetro.
-* **Auto-Zoom Estabilizado:** Filtro paso bajo (EMA) e histéresis para eliminar fluctuaciones en la cámara de navegación.
-* **Fluidez y Cero Jank:** Caché de paleta en memoria para `WifiAdapter` eliminando tirones en scroll y suite validada con 1.957 tests en verde.
-
-### [v3.7.4 (Release Oficial)](../../releases/tag/v3.7.4)
-* **Coordinador de Reanudación (`HomeResumeCoordinator`):** Sincronización atómica de perfiles al volver a primer plano y supresión síncrona en marcha atrás.
-* **Telemetría de Velocidad:** Reconciliación de frescura al reanudar y distinción matemática entre 0 km/h y señal no disponible (`--`).
-* **Privacidad Estricta en CAN y Bluetooth:** Anonimización de números de teléfono, contactos y exclusión de coordenadas GPS privadas en registros de diagnóstico.
-* **Escuchador de Notificaciones:** Sistema de arrendamiento atómico (`NotificationListenerLease`) y filtrado ultrarrápido (<1 µs) de guiado (Maps/Waze).
-* **Clima Resiliente:** Detección de saltos temporales del reloj (`ClockSanity`) y fusión inmutable CAN-Bus + API meteorológica.
-* **Segundo Plano:** Suspensión de animaciones y liberación de recursos gráficos al pausar la interfaz.
 
 ---
 
