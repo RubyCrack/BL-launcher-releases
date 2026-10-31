@@ -1,6 +1,6 @@
 # Política de Seguridad — BlackBird Launcher
 
-*Última actualización: 23 de septiembre de 2026*
+*Última actualización: 31 de octubre de 2026*
 
 La seguridad y la integridad del sistema de infoentretenimiento de su vehículo son de máxima prioridad en el desarrollo de **BlackBird Launcher**. Al operar directamente sobre el hardware del automóvil y capas de comunicación IPC (Android Binder / MCU / Bus CAN), aplicamos prácticas continuas de desarrollo seguro y minimización de vectores de ataque.
 
@@ -12,7 +12,8 @@ Actualmente se proporciona soporte activo de correcciones de seguridad para las 
 
 | Versión | Compatible / Recibe parches |
 | :--- | :---: |
-| **v3.7.x** | Sí |
+| **v3.8.x** (Beta / Actual) | Sí |
+| **v3.7.x** (Estable) | Sí |
 | **< v3.7.0** | No (se recomienda actualizar a la última versión disponible) |
 
 ---
